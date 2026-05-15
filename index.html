@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>Склонение ФИО</title>
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%230a0d18' rx='20'/%3E%3Ctext x='50%25' y='59' dominant-baseline='middle' text-anchor='middle' font-size='72' font-weight='700' fill='url(%23g)'%3E%CE%A9%3C/text%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0%25' stop-color='%235b6cf8'/%3E%3Cstop offset='100%25' stop-color='%238b5cf6'/%3E%3C/linearGradient%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- Фоновые элементы -->
+  <div class="bg-noise"></div>
+  <div class="bg-mesh"></div>
+  <div class="bg-orb bg-orb--1"></div>
+  <div class="bg-orb bg-orb--2"></div>
+  <div class="bg-orb bg-orb--3"></div>
+
+  <!-- Toast уведомление -->
+  <div class="toast" id="toast">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+      <polyline points="20 6 9 17 4 12"></polyline>
+    </svg>
+    <span>Скопировано</span>
+  </div>
+
+  <main class="app-container">
+    <!-- Шапка -->
+    <header class="header-panel">
+      <div class="logo-area">
+        <div class="logo-badge" id="logoBadge" title="...">
+          <span class="logo-omega">Ω</span>
+        </div>
+        <div class="logo-texts">
+          <span class="logo-title">Склонение ФИО</span>
+          <span class="logo-sub">Быстро и точно</span>
+        </div>
+      </div>
+
+      <div class="header-right">
+        <div class="status-pill">
+          <span class="status-dot"></span>
+          <span class="status-label">Онлайн</span>
+        </div>
+
+        <div class="case-selector" id="customSelect">
+          <button class="case-trigger" id="customSelectTrigger" type="button">
+            <span class="case-icon" id="caseIcon">🎁</span>
+            <span class="trigger-text" id="triggerText">Дательный</span>
+            <svg class="trigger-chevron" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="6 9 12 15 18 9"></polyline>
+            </svg>
+          </button>
+          <div class="case-dropdown" id="customSelectDropdown">
+            <div class="dropdown-header">Выберите падеж</div>
+            <div class="select-option" data-value="nominative"  data-icon="👑" data-label="Именительный">
+              <span class="opt-icon">👑</span>
+              <div class="opt-info">
+                <span class="opt-name">Именительный</span>
+                <span class="opt-question">кто?</span>
+              </div>
+              <svg class="opt-check" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+            </div>
+            <div class="select-option active" data-value="dative" data-icon="🎁" data-label="Дательный">
+              <span class="opt-icon">🎁</span>
+              <div class="opt-info">
+                <span class="opt-name">Дательный</span>
+                <span class="opt-question">кому?</span>
+              </div>
+              <svg class="opt-check" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+            </div>
+            <div class="select-option" data-value="genitive"  data-icon="👥" data-label="Родительный">
+              <span class="opt-icon">👥</span>
+              <div class="opt-info">
+                <span class="opt-name">Родительный</span>
+                <span class="opt-question">кого?</span>
+              </div>
+              <svg class="opt-check" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+            </div>
+            <div class="select-option" data-value="accusative" data-icon="😞" data-label="Винительный">
+              <span class="opt-icon">😞</span>
+              <div class="opt-info">
+                <span class="opt-name">Винительный</span>
+                <span class="opt-question">кого?</span>
+              </div>
+              <svg class="opt-check" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+            </div>
+            <div class="select-option" data-value="instrumental" data-icon="🖼️" data-label="Творительный">
+              <span class="opt-icon">🖼️</span>
+              <div class="opt-info">
+                <span class="opt-name">Творительный</span>
+                <span class="opt-question">кем?</span>
+              </div>
+              <svg class="opt-check" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+            </div>
+            <div class="select-option" data-value="prepositional" data-icon="💬" data-label="Предложный">
+              <span class="opt-icon">💬</span>
+              <div class="opt-info">
+                <span class="opt-name">Предложный</span>
+                <span class="opt-question">о ком?</span>
+              </div>
+              <svg class="opt-check" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- Основная карточка -->
+    <div class="glass-card">
+      <div class="card-glow-border"></div>
+      <div class="card-inner">
+
+        <!-- Ввод -->
+        <div class="input-section">
+          <label class="input-label" for="fioInput">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/>
+            </svg>
+            Фамилия Имя Отчество
+          </label>
+          <div class="input-wrap">
+            <input
+              id="fioInput"
+              type="text"
+              autocomplete="off"
+              spellcheck="false"
+              placeholder="Введите ФИО"
+              class="fio-input"
+            />
+            <button id="declineBtn" class="action-btn" type="button">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/>
+              </svg>
+            </button>
+          </div>
+          <div class="input-footer">
+            <p class="helper-text" id="helperText">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/>
+              </svg>
+              Выберите падеж → Введите ФИО → нажмите Enter или кнопку <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor" style="vertical-align:middle;opacity:0.6"><path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/></svg>
+            </p>
+            <label class="mode-toggle" for="autoModeToggle">
+              <input type="checkbox" id="autoModeToggle">
+              <span class="toggle-switch"></span>
+              <span class="toggle-text">Авто</span>
+            </label>
+          </div>
+        </div>
+
+        <!-- Результат -->
+        <div class="result-panel" id="resultPanel">
+          <div class="result-meta">
+            <div class="result-badges">
+              <span class="case-badge" id="caseBadge">Дательный падеж</span>
+              <span class="question-badge" id="questionBadge">кому?</span>
+            </div>
+            <span id="genderTag" class="gender-tag">—</span>
+          </div>
+          <div class="result-body">
+            <span id="resultText" class="result-string">—</span>
+            <button id="copyBtn" class="copy-btn" title="Копировать">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="9" y="9" width="13" height="13" rx="2" ry="2"/>
+                <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/>
+              </svg>
+            </button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <footer class="app-footer">
+      <span id="footerEaster">Автосклонение ФИО · <span id="easterNum">6</span> падежей · Ничего лишнего</span>
+    </footer>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
