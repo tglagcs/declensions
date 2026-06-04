@@ -186,6 +186,11 @@
     }
 
     if (g === 'female') {
+      if (lo.endsWith('ия')) {
+        const b = w.slice(0, -1);
+        return { genitive: b+'и', dative: b+'и', accusative: b+'ю',
+                 instrumental: b+'ей', prepositional: b+'и' }[c] ?? w;
+      }
       if (lo.endsWith('я')) {
         const b = w.slice(0, -1);
         return { genitive: b+'и', dative: b+'е', accusative: b+'ю',
@@ -230,6 +235,14 @@
     return w;
   }
 
+  // Очистка ввода: убираем цифры и спецсимволы, оставляя буквы, дефис и пробелы
+  function sanitizeInput(str) {
+    return str
+      .replace(/[^a-zA-Zа-яёА-ЯЁ\s-]/g, ' ')
+      .replace(/\s+/g, ' ')
+      .trim();
+  }
+
   function toProperCase(word) {
     if (!word) return word;
     return word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();
@@ -237,7 +250,7 @@
 
   // ── Основная функция ────────────────────────────────────
   function declineFullName(animate = true) {
-    const raw = fioInput.value.trim();
+    const raw = sanitizeInput(fioInput.value);
 
     if (!raw) {
       setPlaceholder();
