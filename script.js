@@ -85,6 +85,22 @@
     return 'unknown';
   }
 
+  // Определение пола по фамилии и имени, когда отчества нет
+  function detectGenderBySurname(surname) {
+    if (!surname) return 'unknown';
+    const s = surname.toLowerCase();
+    if (/(ова|ева|ёва|ина|ына|ая|ская|цкая)$/.test(s)) return 'female';
+    if (/(ов|ев|ёв|ин|ын|ий|ый|ой|ский|цкий)$/.test(s)) return 'male';
+    return 'unknown';
+  }
+
+  function detectGenderByName(name) {
+    if (!name) return 'unknown';
+    const n = name.toLowerCase();
+    if (/(а|я)$/.test(n) && !/(илья|никита|кузьма|фома|лука|данила|данило|савва|вова|саша|жора)$/.test(n)) return 'female';
+    return 'unknown';
+  }
+
   function declineSurname(w, c, g) {
     const lo = w.toLowerCase();
     if (/ко$|ых$|их$|аго$|яго$|цкий$|ский$/.test(lo)) {
@@ -262,7 +278,9 @@
     const name       = toProperCase(parts[1] || '');
     const patronymic = toProperCase(parts[2] || '');
 
-    const genderRaw = detectGender(patronymic);
+    let genderRaw = detectGender(patronymic);
+    if (genderRaw === 'unknown') genderRaw = detectGenderBySurname(surname);
+    if (genderRaw === 'unknown') genderRaw = detectGenderByName(name);
     const gender = genderRaw !== 'unknown' ? genderRaw : 'male';
     const c = currentCase;
 
