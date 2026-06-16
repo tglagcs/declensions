@@ -4,6 +4,10 @@
 
 **[→ Открыть сайт](https://tglagcs.github.io/declensions/)**
 
+## Скриншот
+
+<img width="1280" height="640" alt="declensions_preview" src="https://github.com/user-attachments/assets/8ffb2ae6-a31a-44c5-9044-ce85a4683cf5" />
+
 ---
 
 ## Возможности
@@ -28,4 +32,4 @@ cd declensions
 
 ---
 
-> P.S. Не стоит нажимать на иконку Ω ...
+> P.S. Не нажимай на иконку "Ω" ... 💀
