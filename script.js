@@ -172,11 +172,24 @@
     return w;
   }
 
+  // Имена с беглой гласной, где обычное правило "согласная + окончание" не работает
+  const FLEETING_VOWEL_NAMES = {
+    'павел': { genitive: 'Павла', dative: 'Павлу', accusative: 'Павла',
+               instrumental: 'Павлом', prepositional: 'Павле' },
+    'лев':   { genitive: 'Льва',  dative: 'Льву',  accusative: 'Льва',
+               instrumental: 'Львом', prepositional: 'Льве' },
+    'пётр':  { genitive: 'Петра', dative: 'Петру', accusative: 'Петра',
+               instrumental: 'Петром', prepositional: 'Петре' },
+  };
+
   function declineName(w, c, g) {
     const lo = w.toLowerCase();
     if (c === 'nominative') return w;
 
     if (g === 'male') {
+      if (FLEETING_VOWEL_NAMES[lo]) {
+        return FLEETING_VOWEL_NAMES[lo][c] ?? w;
+      }
       if (lo.endsWith('й')) {
         const b = w.slice(0, -1);
         return { genitive: b+'я', dative: b+'ю', accusative: b+'я',
